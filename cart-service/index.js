@@ -2,13 +2,18 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./config/db');
+const cartRoutes = require('./routes/cartRoutes');
+const { connectRabbitMQ, sendToQueue } = require('../shared/rabbitmq');
 
 const app = express();
 app.use(bodyParser.json());
+app.use('/api/cart', cartRoutes);
 
 app.get('/', (req, res) =>{
     res.send('Cart service is running');
 });
+
+let queueName = 'product-availability';
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, async()=>{
@@ -18,7 +23,8 @@ app.listen(PORT, async()=>{
         await sequelize.authenticate();
         console.log('Connected to DB');
         await sequelize.sync();
+        await connectRabbitMQ(queueName);
     } catch(error){
-        console.log('DB connection failed: ', error);
+        console.log('Startup error: ', error);
     }
 });
