@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/api/cart', cartRoutes);
 
-app.get('/', (req, res) =>{
+app.get('/cart-service', (req, res) =>{
     res.send('Cart service is running');
 });
 
