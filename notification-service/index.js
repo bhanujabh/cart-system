@@ -23,7 +23,7 @@ async function connectRabbitMQ() {
   ];
 
   for (let queue of queues) {
-    await channel.assertQueue(queue, { durable: false });
+    await channel.assertQueue(queue, { durable: true });
 
     channel.consume(queue, async (msg) => {
       if (msg !== null) {

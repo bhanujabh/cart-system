@@ -13,7 +13,7 @@ app.get('/shipping-service', (req, res)=>{
 
 let queueName = 'shipment-updated';
 
-PORT = process.env.PORT || 3003;
+PORT = process.env.PORT || 3006;
 app.listen(PORT, async ()=>{
     console.log(`Cart service is listening on port ${PORT}`);
     
