@@ -19,6 +19,7 @@ async function connectRabbitMQ() {
     'inventory-updated',
     'inventory-decreased',
     'order-placed',
+    'email-queue'
   ];
 
   for (let queue of queues) {
@@ -49,6 +50,12 @@ async function connectRabbitMQ() {
           );
         }
 
+        if(queue === 'email-queue'){
+          await sendNotificationEmail(
+            data.subject || '📩 Message from Auth Service',
+            data.body || 'Welcome!'
+          );
+        }
         channel.ack(msg);
       }
     });
