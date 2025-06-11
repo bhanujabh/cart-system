@@ -13,6 +13,13 @@ app.get('/cart-service', (req, res) =>{
     res.send('Cart service is running');
 });
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
 let queueName = 'product-availability';
 
 const PORT = process.env.PORT || 3001;

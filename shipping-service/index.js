@@ -3,13 +3,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { sequelize } = require('./config/shippingDB');
 const { connectRabbitMQ, sendToQueue } = require('../shared/rabbitmq');
+const shippingRoutes = require('./routes/shippingRoutes');
 
 const app = express();
 app.use(bodyParser.json());
+app.use('/api/shipping', shippingRoutes);
 
 app.get('/shipping-service', (req, res)=>{
     res.send('Shipping service is running');
 });
+
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 
 let queueName = 'shipment-updated';
 

@@ -13,6 +13,13 @@ app.get('/order-service', (req, res) =>{
     res.send('Order service is running');
 });
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
 let queueName = 'order-created';
 
 const PORT = process.env.PORT || 3002;

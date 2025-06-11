@@ -14,6 +14,13 @@ app.get('/auth-service', (req, res) =>{
     res.send('Authentication service is running');
 });
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
 const PORT = process.env.PORT || 3005;
 
 app.listen(PORT, async () => {
