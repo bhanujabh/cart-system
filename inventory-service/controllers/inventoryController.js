@@ -1,5 +1,5 @@
 const Inventory = require('../models/inventory');
-const { sendToQueue } = require('../../shared/rabbitmq'); // Adjust path if needed
+const { sendToQueue } = require('../../shared/rabbitmq'); 
 
 exports.upsertInventory = async (req, res) => {
   try {

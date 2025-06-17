@@ -1,9 +1,8 @@
 import axios from "axios";
 
 const productAPI = axios.create({
-  baseURL: 'http://localhost:3003/api/inventory',
+  baseURL: 'http://localhost:3007/api/product',
 });
 
-export const upsertInventory = (data) => productAPI.post('/upsert', data);
-export const decreaseInventory = (data) => productAPI.post('/decrease', data);
-export const getInventory = (productId) => productAPI.get(`/${productId}`);
+export const getAllProducts = () => productAPI.get('/');
+export const getProductById = (id) => productAPI.get(`/${id}`);

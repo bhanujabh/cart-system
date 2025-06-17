@@ -31,7 +31,7 @@ async function connectRabbitMQ() {
       'inventory-updated',
       'inventory-decreased',
       'order-placed',
-      'email-queue'
+      'email-queue',
     ];
 
     for (let queue of queues) {
@@ -59,6 +59,15 @@ async function connectRabbitMQ() {
                   recipient
                 );
                 break;
+
+              case 'inventory-decreased':
+                await sendNotificationEmail(
+                  '📉 Inventory Decreased',
+                  `Product ${data.productId} stock decreased. Remaining: ${data.quantity}`,
+                  recipient
+                );
+                break;
+
 
               case 'order-placed':
                 await sendNotificationEmail(
