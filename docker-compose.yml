@@ -73,6 +73,15 @@ services:
     depends_on:
       - rabbitmq
 
+  product-service:
+    build: ./product-service
+    ports:
+      - "3007:3007"
+    env_file:
+      - ./product-service/.env
+    depends_on:
+      - rabbitmq
+
   frontend:
     build: ./frontend
     ports:
