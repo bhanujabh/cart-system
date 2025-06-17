@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { getCart, removeFromCart } from '../api/cartApi';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -7,11 +7,18 @@ const CartPage = () => {
   const userId = user?.id;
   const [cart, setCart] = useState([]);
 
-  const fetchCart = () => {
-    getCart(userId).then(res => setCart(res.data.CartItems || [])).catch(console.error);
-  };
+  const fetchCart = useCallback(() => {
+    if (!userId) return;
+    getCart(userId)
+    .then(res => setCart(res.data.CartItems || []))
+    .catch(console.error);
+  }, [userId]);
 
-  useEffect(fetchCart, []);
+  useEffect(() => {
+    fetchCart();
+  }, [fetchCart]);
+
+
 
   const handleRemove = async (itemId) => {
     await removeFromCart(itemId);
