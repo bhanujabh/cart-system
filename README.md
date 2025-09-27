@@ -96,10 +96,3 @@ graph TD
 * Add **payment service integration**.
 
 
-
----
-
-👉 This README emphasizes **microservices, RabbitMQ, and backend-heavy focus**, not just “e-commerce clone.”  
-
-Would you like me to also include **sample products seeding instructions** inside the README so anyone cloning your repo can get dummy data quickly?
-```
